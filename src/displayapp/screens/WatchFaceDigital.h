@@ -20,6 +20,7 @@ namespace Pinetime {
     class NotificationManager;
     class HeartRateController;
     class MotionController;
+    class Timer;
   }
 
   namespace Applications {
@@ -34,7 +35,8 @@ namespace Pinetime {
                          Controllers::Settings& settingsController,
                          Controllers::HeartRateController& heartRateController,
                          Controllers::MotionController& motionController,
-                         Controllers::SimpleWeatherService& weather);
+                         Controllers::SimpleWeatherService& weather,
+                         Controllers::Timer& timer);
         ~WatchFaceDigital() override;
 
         void Refresh() override;
@@ -56,6 +58,8 @@ namespace Pinetime {
 
         Utility::DirtyValue<std::chrono::time_point<std::chrono::system_clock, std::chrono::days>> currentDate;
 
+        lv_obj_t* timerIcon;
+        lv_obj_t* timeRemaining;
         lv_obj_t* label_time;
         lv_obj_t* label_time_ampm;
         lv_obj_t* label_date;
@@ -73,6 +77,7 @@ namespace Pinetime {
         Controllers::HeartRateController& heartRateController;
         Controllers::MotionController& motionController;
         Controllers::SimpleWeatherService& weatherService;
+        Controllers::Timer& timer;
 
         lv_task_t* taskRefresh;
         Widgets::StatusIcons statusIcons;
@@ -92,7 +97,8 @@ namespace Pinetime {
                                              controllers.settingsController,
                                              controllers.heartRateController,
                                              controllers.motionController,
-                                             *controllers.weatherController);
+                                             *controllers.weatherController,
+                                             controllers.timer);
       };
 
       static bool IsAvailable(Pinetime::Controllers::FS& /*filesystem*/) {
