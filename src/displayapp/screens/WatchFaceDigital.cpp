@@ -116,8 +116,8 @@ void WatchFaceDigital::Refresh() {
   if (timer.IsRunning()) {
     auto secondsRemaining = std::chrono::duration_cast<std::chrono::seconds>(timer.GetTimeRemaining());
 
-    int minutes = secondsRemaining.count() / 60;
-    int seconds = secondsRemaining.count() % 60;
+    uint8_t minutes = secondsRemaining.count() / 60;
+    uint8_t seconds = secondsRemaining.count() % 60;
     lv_label_set_text_fmt(timeRemaining, "%02d:%02d", minutes, seconds);
 
     lv_obj_set_hidden(timeRemaining, false);
