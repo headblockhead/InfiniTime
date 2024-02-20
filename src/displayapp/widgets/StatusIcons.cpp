@@ -3,7 +3,7 @@
 
 using namespace Pinetime::Applications::Widgets;
 
-StatusIcons::StatusIcons(const Controllers::Battery& batteryController, const Controllers::Ble& bleController, Controllers::Timer& timer)
+StatusIcons::StatusIcons(const Controllers::Battery& batteryController, const Controllers::Ble& bleController, const Controllers::Timer& timer)
   : batteryIcon(true), batteryController {batteryController}, bleController {bleController}, timer {timer} {
 }
 
