@@ -72,7 +72,7 @@ def main():
         subprocess.check_call(line)
         if patches:
             for patch in patches:
-                subprocess.check_call(['/usr/bin/env', 'patch', name+'.'+extension, patch])
+                subprocess.check_call(['patch', name+'.'+extension, patch])
 
 
 
