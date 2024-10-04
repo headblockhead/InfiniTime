@@ -1,6 +1,10 @@
 # Nix
 result
 
+# CCLS
+.ccls-cache/
+compile_commands.json
+
 .idea/
 # Python virtual environment for DFU images
 .venv/
