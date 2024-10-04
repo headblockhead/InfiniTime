@@ -334,7 +334,7 @@ void DisplayApp::Refresh() {
         ApplyBrightness();
         // reload main display app if we are notifications or quicksettings or app menu
         if (currentApp == Apps::Launcher || currentApp == Apps::Notifications || currentApp == Apps::QuickSettings) {
-          LoadApp(Apps::Clock, DisplayApp::FullRefreshDirections::Up);
+          LoadScreen(Apps::Clock, DisplayApp::FullRefreshDirections::Up);
         }
         state = States::Running;
         break;
@@ -523,9 +523,7 @@ void DisplayApp::LoadScreen(Apps app, DisplayApp::FullRefreshDirections directio
                                                                  filesystem,
                                                                  std::move(apps));
     }
-      ReturnApp(Apps::Clock,
-                FullRefreshDirections::Down,
-                TouchEvents::SwipeDown); // We don't want to load a different app when in the clock
+      returnAppStack.Push(Apps::Clock);
       break;
     case Apps::Clock: {
       const auto* watchFace =
