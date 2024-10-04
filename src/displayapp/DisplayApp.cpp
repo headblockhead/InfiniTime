@@ -331,6 +331,10 @@ void DisplayApp::Refresh() {
         }
         lv_disp_trig_activity(nullptr);
         ApplyBrightness();
+        // reload main display app if we are notifications or quicksettings or app menu
+        if (currentApp == Apps::Launcher || currentApp == Apps::Notifications || currentApp == Apps::QuickSettings) {
+          LoadApp(Apps::Clock, DisplayApp::FullRefreshDirections::Up);
+        }
         state = States::Running;
         break;
       case Messages::UpdateBleConnection:
@@ -517,7 +521,11 @@ void DisplayApp::LoadScreen(Apps app, DisplayApp::FullRefreshDirections directio
                                                                  timer,
                                                                  filesystem,
                                                                  std::move(apps));
-    } break;
+    }
+      ReturnApp(Apps::Clock,
+                FullRefreshDirections::Down,
+                TouchEvents::SwipeDown); // We don't want to load a different app when in the clock
+      break;
     case Apps::Clock: {
       const auto* watchFace =
         std::find_if(userWatchFaces.begin(), userWatchFaces.end(), [this](const WatchFaceDescription& watchfaceDescription) {
