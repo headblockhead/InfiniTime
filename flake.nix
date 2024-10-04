@@ -37,7 +37,7 @@
             ];
           };
           # The firmware (nix build)
-          packages.pinetime = pkgs.callPackage ./default.nix {
+          packages.infinitime = pkgs.callPackage ./default.nix {
             gcc-arm-embedded = pkgs.gcc-arm-embedded-10;
             nrf5-sdk = pkgs.callPackage ./nrf5-sdk.nix { };
           };
