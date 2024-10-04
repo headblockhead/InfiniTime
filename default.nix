@@ -1,9 +1,10 @@
 { gcc-arm-embedded
 , gnumake
+, python311Packages
 , cmake
 , stdenv
 , nrf5-sdk
-, python39
+, python311
 , nodePackages
 , mcuboot-imgtool
 }:
@@ -15,7 +16,7 @@ stdenv.mkDerivation {
   src = ./.;
 
   nativeBuildInputs = [ cmake gnumake gcc-arm-embedded ];
-  buildInputs = [ nodePackages.lv_font_conv python39 mcuboot-imgtool ];
+  buildInputs = [ nodePackages.lv_font_conv python311 mcuboot-imgtool python311Packages.imgtool ];
 
   cmakeFlags = [
     "-DCMAKE_BUILD_TYPE=Release"
