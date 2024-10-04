@@ -11,6 +11,7 @@
         let
           pkgs = import nixpkgs {
             inherit system;
+            config.allowUnfree = true;
             overlays = [
               (final: prev: {
                 xc = inputs.xc.packages.x86_64-linux.xc;
