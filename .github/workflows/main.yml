@@ -29,7 +29,7 @@ jobs:
       - name: Upload DFU files
         uses: actions/upload-artifact@v4
         with:
-          name: pinetime-mcuboot-app-dfu
+          name: pinetime-mcuboot-app-dfu.zip
           path: ./pinetime-mcuboot-app-dfu/
       - name: Upload MCUBoot image
         uses: actions/upload-artifact@v4
