@@ -28,3 +28,25 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - run: nix build '.?submodules=1#infinitime'
+      - name: Unzip DFU package
+        run: unzip ./result/src/pinetime-mcuboot-app-dfu-*.zip -d ./pinetime-mcuboot-app-dfu
+      - name: Upload DFU artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: InfiniTime DFU ${{ github.head_ref }}
+          path: ./pinetime-mcuboot-app-dfu/
+      - name: Upload MCUBoot image artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: InfiniTime MCUBoot image ${{ github.head_ref }}
+          path: ./result/src/pinetime-mcuboot-app-image-*.bin
+      - name: Upload standalone ELF artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: InfiniTime image ${{ github.head_ref }}
+          path: ./result/src/pinetime-app-*.out
+      - name: Upload resources artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: InfiniTime resources ${{ github.head_ref }}
+          path: ./result/src/infinitime-resources-*.zip
